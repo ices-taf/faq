@@ -6,13 +6,24 @@
 
 ### seabass in 4bc... has a summary table and custom table with the recreational catches in there. How do I extract those however from SAG directly from R?
 
+First load the icesSAG library and find the approriate `assessmentKey`.
+
 ```{r}
 library(icesSAG)
 
 keys <- icesSAG::findAssessmentKey("bss.27.4bc", year = 2021)
+```
 
+Then extract the custom columns using the `getCustomColumns` function.
+```{r}
 custom <- icesSAG::getCustomColumns(keys)
+head(custom)
+```
 
+Finally, you can restructure the output using something like tidyr and dplyr,
+for example:
+
+```{r}
 library(dplyr)
 library(tidyr)
 
